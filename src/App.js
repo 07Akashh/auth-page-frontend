@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react';
+import AppRouter from './routes/AppRouter';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchUser } from './store/slices/authSlice';
 
-function App() {
+const App = () => {
+
+  const dispatch = useDispatch();
+  const { status } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (status === 'idle') {
+      dispatch(fetchUser());
+    }
+  }, [dispatch, status]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <AppRouter />
     </div>
   );
-}
+};
 
 export default App;

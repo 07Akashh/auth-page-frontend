@@ -41,8 +41,7 @@ const Register = () => {
         setErrors(validationErrors);
 
         if (Object.keys(validationErrors).length === 0) {
-            const res = await dispatch(register(form)).unwrap();
-            console.log(res);
+            await dispatch(register(form)).unwrap();
         }
     };
 
